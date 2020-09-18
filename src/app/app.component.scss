@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 2em auto;
+  justify-content: space-around;
+  align-items: center;
+  .button-wrapper {
+    width: 60%;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .button-wrapper__button {
+    background-color: aqua;
+    font-size: 18px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    padding: 1em;
+    margin: auto;
+  }
+}
