@@ -19,7 +19,6 @@ export class AppEffects {
         countActionsType.clear
       ),
       map((value) => {
-        console.log(value);
         return new CountUpdatedAtAction({ updatedAt: Date.now() });
       })
     );

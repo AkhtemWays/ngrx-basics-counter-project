@@ -7,6 +7,7 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import { routerReducers } from './router/router.reducer';
 
 export interface State {
   [countNode]: CountState;
@@ -15,7 +16,3 @@ export interface State {
 export const reducers: ActionReducerMap<State> = {
   [countNode]: countReducer,
 };
-
-export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? []
-  : [];

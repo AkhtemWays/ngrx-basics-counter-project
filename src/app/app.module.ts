@@ -1,4 +1,4 @@
-import { reducers, metaReducers } from './reducers/index';
+import { reducers } from './reducers/index';
 import { AppEffects } from './app.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,7 +11,15 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  RouterStateSerializer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
+import { metaReducers } from './metaReducers';
+import {
+  CustomSerializer,
+  routerReducers,
+} from './reducers/router/router.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,11 +27,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
+    StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    // не включил routerReducers
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -35,7 +44,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     EffectsModule.forRoot([AppEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
-  providers: [],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
